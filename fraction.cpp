@@ -1,7 +1,7 @@
 //
 //    FILE: fraction.cpp
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.1.9
+// VERSION: 0.1.10
 // PURPOSE: Arduino library to implement a Fraction datatype 
 //     URL: https://github.com/RobTillaart/Fraction
 //
@@ -10,6 +10,7 @@
 // - divide by zero errors
 // - test extensively
 //
+// 0.1.10   2020-06-10 fix library.json
 // 0.1.9    refactor
 // 0.1.8  - refactor made constructors explicit; fix issue #33 double --> float
 // 0.1.07 - major refactoring by Chris-A
