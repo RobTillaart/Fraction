@@ -57,7 +57,7 @@ public:
 
     int32_t  nominator() { return n; };
     int32_t  denominator() { return d; };
-	
+
     static Fraction mediant(const Fraction&, const Fraction&);
     static Fraction middle(const Fraction&, const Fraction&);
 
