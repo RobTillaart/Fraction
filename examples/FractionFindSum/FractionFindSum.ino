@@ -34,7 +34,7 @@ void setup()
 
 void findSum(Fraction f)
 {
-  Fraction z(0);
+  Fraction z(0, 1);
 
   Serial.print(f);
   Serial.print(" =\t ");

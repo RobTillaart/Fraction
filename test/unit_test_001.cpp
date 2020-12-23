@@ -57,16 +57,16 @@ unittest(test_new_operator)
 unittest(test_constructor)
 {
   Fraction pi(PI);
-  assertEqual(1, pi.nominator());
-  assertEqual(1, pi.denominator());
+  assertEqual(355, pi.nominator());
+  assertEqual(113, pi.denominator());
   assertFalse(pi.isProper());
-  fprintf(stderr, "PI -> %1.6f\n", pi.toFloat());
+  fprintf(stderr, "PI -> %1.8f\n", pi.toFloat());
   
   Fraction ee(EULER);
-  assertEqual(1, ee.nominator());
-  assertEqual(1, ee.denominator());
+  assertEqual(3985, ee.nominator());
+  assertEqual(1466, ee.denominator());
   assertFalse(ee.isProper());
-  fprintf(stderr, "EULER -> %1.6f\n", ee.toFloat());
+  fprintf(stderr, "EULER -> %1.8f\n", ee.toFloat());
 
   Fraction fr(49, 14);
   assertEqual(7, fr.nominator());
@@ -97,6 +97,7 @@ unittest(test_math)
   Fraction pi(PI);
   Fraction ee(EULER);
   // TODO
+  assertEqual(1, 1);
 }
 
 
