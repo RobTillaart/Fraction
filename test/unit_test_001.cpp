@@ -56,6 +56,8 @@ unittest(test_new_operator)
 
 unittest(test_constructor)
 {
+  fprintf(stderr, "VERSION:\t%s\n", FRACTIONLIBVERSION);
+
   Fraction pi(PI);
   assertEqual(355, pi.nominator());
   assertEqual(113, pi.denominator());
