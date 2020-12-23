@@ -1,7 +1,7 @@
 //
 //    FILE: fraction.cpp
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.1.10
+// VERSION: 0.1.11
 // PURPOSE: Arduino library to implement a Fraction datatype
 //     URL: https://github.com/RobTillaart/Fraction
 //
@@ -10,18 +10,19 @@
 // - divide by zero errors
 // - test extensively
 //
-// 0.1.10   2020-06-10 fix library.json
+// 0.1.11   2020-12-23  arduino-CI + unit tests
+// 0.1.10   2020-06-10  fix library.json
 // 0.1.9    refactor
-// 0.1.8  - refactor made constructors explicit; fix issue #33 double --> float
-// 0.1.07 - major refactoring by Chris-A
-// 0.1.06 - added proper(), mediant(), angle();
-// 0.1.05 - tested negative Fractions math, added constructors,
+// 0.1.8    refactor made constructors explicit; fix issue #33 double --> float
+// 0.1.07   major refactoring by Chris-A
+// 0.1.06   added proper(), mediant(), angle();
+// 0.1.05   tested negative Fractions math, added constructors,
 //          minor refactoring,
-// 0.1.04 - stabilizing code, add simplify() for some code paths.
-// 0.1.03 - added toDouble(), tested several fractionize() codes, bug fixes.
-// 0.1.02 - faster fractionize code
-// 0.1.01 - some fixes
-// 0.1.00 - initial version
+// 0.1.04   stabilizing code, add simplify() for some code paths.
+// 0.1.03   added toDouble(), tested several fractionize() codes, bug fixes.
+// 0.1.02   faster fractionize code
+// 0.1.01   some fixes
+// 0.1.00   initial version
 
 #include "fraction.h"
 
