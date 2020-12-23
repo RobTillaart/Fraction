@@ -48,7 +48,7 @@ void findSum(Fraction f)
       Serial.print(g);
       Serial.print(" + ");
     }
-    if (f == Fraction(0))
+    if (f == Fraction(0, 1))
     {
       break;
     }
