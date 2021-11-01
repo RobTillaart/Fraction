@@ -1,6 +1,6 @@
-# Syntax Coloring Map For Fraction
+# Syntax Colouring Map For Fraction
 
-# Datatypes (KEYWORD1)
+# Data types (KEYWORD1)
 Fraction	KEYWORD1
 
 # Methods and Functions (KEYWORD2)
