@@ -17,5 +17,6 @@
   },
   "version":"0.1.12",
   "frameworks": "arduino",
-  "platforms": "*"
+  "platforms": "*",
+  "headers": "fraction.h"
 }
