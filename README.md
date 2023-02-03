@@ -29,7 +29,7 @@ into a fraction is a nice programming problem, fast with a minimal error.
 In short, use fractions with care otherwise your sketch might get broken ;)
 
 
-## interface
+## Interface
 
 ```cpp
 #include "fraction.h"
