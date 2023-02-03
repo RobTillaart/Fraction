@@ -68,7 +68,7 @@ void test_math()
   Serial.println(__FUNCTION__);
 
   delay(10);
-  Fraction a(0);
+  Fraction a((int)0);
   Fraction pi(PI);
   Fraction e(EULER);
   start = micros();
@@ -143,7 +143,7 @@ void  test_misc()
   Serial.println(__FUNCTION__);
 
   delay(10);
-  Fraction a(0);
+  Fraction a((int)0);
   Fraction pi(PI);
   Fraction e(EULER);
   start = micros();
@@ -163,4 +163,4 @@ void  test_misc()
 }
 
 
-// -- END OF FILE --
+//  -- END OF FILE --
