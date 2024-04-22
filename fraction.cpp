@@ -1,7 +1,7 @@
 //
 //    FILE: fraction.cpp
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.1.16
+// VERSION: 0.2.0
 // PURPOSE: Arduino library to implement a Fraction data type
 //     URL: https://github.com/RobTillaart/Fraction
 
@@ -82,28 +82,6 @@ Fraction::Fraction(int32_t p, int32_t q) : n(p), d(q)
   simplify();
 }
 
-
-//////////////////////////////////////
-//
-//  PRINTING
-//
-size_t Fraction::printTo(Print& p) const
-{
-  size_t s = 0;
-  //  TODO split of sign first
-  //
-  //  vs 22/7 => 3_1/7
-  // if (n >= d)
-  // {
-  // s += p.print(n/d, DEC);
-  // s += p.print("_");
-  // }
-  // s += p.print(n%d, DEC);
-  s += p.print(n, DEC);
-  s += p.print('/');
-  s += p.print(d, DEC);
-  return s;
-};
 
 
 //////////////////////////////////////
@@ -250,6 +228,11 @@ Fraction& Fraction::operator /= (const Fraction &c)
 }
 
 
+
+//////////////////////////////////////
+//
+//  CONVERSION and PRINTING
+//
 double Fraction::toDouble()
 {
   return double(n) / d;
@@ -262,10 +245,29 @@ float Fraction::toFloat()
 }
 
 
+String Fraction::toString()
+{
+  String s = "(";
+  // if (n < 0) s += "-";
+  s += n;
+  s += "/";
+  s += d;
+  s += ")";
+  return s;
+}
+
+
 //  fraction is proper if abs(fraction) < 1
 bool Fraction::isProper()
 {
   return abs(n) < abs(d);
+}
+
+
+//  fraction is proper if abs(fraction) < 1
+bool Fraction::isInteger()
+{
+  return (d == 1);
 }
 
 

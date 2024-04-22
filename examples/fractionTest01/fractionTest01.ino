@@ -17,6 +17,7 @@ Fraction n(0, 5);
 Fraction p(5, 1);
 Fraction pi(PI);
 Fraction e(EULER);
+Fraction gr(1.6180339887498948482);  //  golden ratio
 
 
 void setup()
@@ -26,16 +27,17 @@ void setup()
   Serial.println(FRACTION_LIB_VERSION);
   Serial.println();
 
-  Serial.println(a);
-  Serial.println(aa);
-  Serial.println(b);
-  Serial.println(n);
-  Serial.println(p);
-  Serial.println(q);
-  Serial.println(pi);
-  Serial.println(e);
-  Serial.println(Fraction::middle(pi, e));
-  Serial.println(Fraction::mediant(pi, e));
+  Serial.println(a.toString());
+  Serial.println(aa.toString());
+  Serial.println(b.toString());
+  Serial.println(n.toString());
+  Serial.println(p.toString());
+  Serial.println(q.toString());
+  Serial.println(pi.toString());
+  Serial.println(e.toString());
+  Serial.println(Fraction::middle(pi, e).toString());
+  Serial.println(Fraction::mediant(pi, e).toString());
+  Serial.println(gr.toString());
   Serial.println();
 
   testPlus();
@@ -62,10 +64,10 @@ void testPlus()
   Serial.println("testPlus");
   Serial.println(a + b);
   Fraction c = a + b;
-  Serial.println(c);
+  Serial.println(c.toString());
   c = a;
   c += b;
-  Serial.println(c);
+  Serial.println(c.toString());
   Serial.println();
   Serial.println();
 }
@@ -76,10 +78,10 @@ void testMin()
   Serial.println("testMin");
   Serial.println(a - b);
   Fraction c = a - b;
-  Serial.println(c);
+  Serial.println(c.toString());
   c = a;
   c -= b;
-  Serial.println(c);
+  Serial.println(c.toString());
   Serial.println();
   Serial.println();
 }
@@ -90,10 +92,10 @@ void testMul()
   Serial.println("testMul");
   Serial.println(a * b);
   Fraction c = a * b;
-  Serial.println(c);
+  Serial.println(c.toString());
   c = a;
   c *= b;
-  Serial.println(c);
+  Serial.println(c.toString());
   Serial.println();
   Serial.println();
 }
@@ -104,10 +106,10 @@ void testDiv()
   Serial.println("testDiv");
   Serial.println(a / b);
   Fraction c = a / b;
-  Serial.println(c);
+  Serial.println(c.toString());
   c = a;
   c /= b;
-  Serial.println(c);
+  Serial.println(c.toString());
   Serial.println();
   Serial.println();
 }

@@ -6,10 +6,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.2.0] - 2024-04-22
+- default value constructor (0)
+- add support for arrays
+-
+
+----
+
 ## [0.1.16] - 2023-11-02
 - update readme.md
 - minor edits
-
 
 ## [0.1.15] - 2023-02-02
 - update GitHub actions
