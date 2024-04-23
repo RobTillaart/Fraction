@@ -50,8 +50,8 @@ unittest(test_constructor)
   //  assertEqual(113, pi.denominator());
   //  (15689, 4994)
   assertFalse(pi.isProper());
-  fprintf(stderr, "PI %1.8f \n", PI);
-  fprintf(stderr, "PI %s => %1.8f\n", pi.toString(), pi.toFloat());
+  fprintf(stderr, "PI %1.8f\n", PI);
+  fprintf(stderr, "pi %1.8f\n", pi.toFloat());
 
   Fraction ee(EULER);
   assertEqualFloat(EULER, ee.toFloat(), 0.0001)
@@ -60,8 +60,8 @@ unittest(test_constructor)
   //  assertEqual(1466, ee.denominator());
   //  (2721, 1001)
   assertFalse(ee.isProper());
-  fprintf(stderr, "EULER %1.8f \n", EULER);
-  fprintf(stderr, "euler => %s => %1.8f\n", ee.toString(), ee.toFloat());
+  fprintf(stderr, "EULER %1.8f\n", EULER);
+  fprintf(stderr, "euler %1.8f\n", ee.toFloat());
 
   Fraction fr(49, 14);
   assertEqual(7, fr.nominator());
