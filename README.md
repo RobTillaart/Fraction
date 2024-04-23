@@ -32,7 +32,23 @@ into a fraction is a nice programming problem, fast with a minimal error.
 In short, use fractions with care otherwise your sketch might get broken ;)
 
 
-#### Breaking change 0.2.0
+#### 0.2.0 Breaking change 1
+
+When testing with the array implementation it became evident that some
+Fractions were incorrect (not just inaccurate). 
+
+An analysis lead to using reciproke values for fractions larger than 1.
+By excluding the integerPart the problem looks solved in most cases. 
+For very small values there are still problems as the fraction cannot be determined. 
+
+A test sketch **fraction_extensive.ino** has been added to test all floats 
+with up to five decimals 0.00000 .. 0.99999.
+Results looking good but it is no proof of correctness or guarantee there 
+are no issues left. In fact the well known fraction for PI = 355/113 is not 
+found in 0.2.0 anymore. This will be investigated in the future.
+
+
+#### 0.2.0 Breaking change 2
 
 The 0.1.x version implemented the **Printable** interface to allow
 ```cpp
@@ -49,6 +65,11 @@ So the **Printable** interface is removed and replaced by a **toString()** funct
 Fraction fr(PI);
 Serial.print(fr.toString());  //  prints "(355/113)"
 ```
+
+
+#### Related
+
+
 
 
 ## Interface
@@ -119,6 +140,7 @@ The library is reasonably tested. If problems arise please open an issue.
 
 #### Should
 
+- investigate the fraction of PI (0.2.0 does not find 355/113)
 - performance testing
 - investigate divide by zero errors
   - NAN in fraction?  =>  0/0 ?

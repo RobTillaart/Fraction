@@ -376,7 +376,7 @@ void Fraction::simplify()
 //
 //  minimalistic is fast and small
 //
-//  check for a discussion found later
+//  check for a discussion found later (link is dead)
 //  - http://mathforum.org/library/drmath/view/51886.html
 //  - http://www.gamedev.net/topic/354209-how-do-i-convert-a-decimal-to-a-fraction-in-c/
 //
@@ -412,7 +412,7 @@ void Fraction::fractionize(float val)
       int32_t count = (int32_t)test;    //  "N"
       int32_t n = (count + 1) * low.n + high.n;
       int32_t d = (count + 1) * low.d + high.d;
-      if ((n > 0x8000) || (d > 0x10000))
+      if ((n > 0x10000) || (d > 0x10000))
       break;
       high.n = n - low.n;  //  new "A"
       high.d = d - low.d;
