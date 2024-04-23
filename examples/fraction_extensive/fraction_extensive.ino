@@ -1,18 +1,19 @@
 //
-//    FILE: fraction_exhaustive.ino
+//    FILE: fraction_extensive_test.ino
 //  AUTHOR: Rob Tillaart
-// PURPOSE: exhaustive fraction testing
+// PURPOSE: reasonable extensive fraction test
 //     URL: https://github.com/RobTillaart/Fraction
-//
-//  Adjust accuracy if needed.
+
+
+//  step size to test, typical 100000
+uint32_t N = 100000;
+
 
 #include "fraction.h"
 
 uint32_t start, stop;
 float maxError = 0;
 
-//  step size to test, typical 100000
-uint32_t N = 10000;
 
 void setup()
 {
@@ -36,7 +37,7 @@ void setup()
     // float absError = abs(f - g);
     // if (relError > maxError)
     {
-      maxError = relError;
+      if (relError > maxError) maxError = relError;
       Serial.print(n);
       Serial.print("\t");
       Serial.print(g, 6);
@@ -53,6 +54,8 @@ void setup()
   Serial.println();
   Serial.print("MILLIS: ");
   Serial.println(stop - start);
+  Serial.print("MAXERR: ");
+  Serial.println(maxError);
 }
 
 
