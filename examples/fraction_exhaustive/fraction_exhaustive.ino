@@ -7,9 +7,9 @@
 #include "fraction.h"
 
 uint32_t start, stop;
-uint32_t count = 0;
 
 float maxError = 0;
+uint32_t lastTime = 0;
 
 void setup()
 {
@@ -22,26 +22,28 @@ void setup()
 
   start = millis();
 
-  for (uint32_t n = 100; n <= 1000000; n++)
+  //  test 0.00000 .. 1.00000
+  for (uint32_t n = 0; n <= 100000; n++)
   {
-    float g = n * 1e-6;
+    float g = n * 1e-5;
     Fraction frac( g );
     float f = frac.toFloat();
     //  test for relative error 1e-4 = 0.01%
     //  find the maxError so far.
     float relError = abs(abs(f / g) - 1);
+    // float absError = abs(f - g);
     if (relError > maxError)
     {
       maxError = relError;
-      //      Serial.print(count++);
-      //      Serial.print("\t");
       Serial.print(n);
       Serial.print("\t");
       Serial.print(frac.toString());
       Serial.print("\t\t");
-      Serial.print(f, 7);
+      Serial.print(f, 6);
       Serial.print("\t\t");
-      Serial.println(maxError, 7);
+      Serial.print(g, 6);
+      Serial.print("\t\t");
+      Serial.println(relError, 6);
     }
   }
   stop = millis();
