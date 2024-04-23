@@ -2,7 +2,6 @@
 //    FILE: fractionTest01.ino
 //  AUTHOR: Rob Tillaart
 // PURPOSE: test sketch for fraction math
-//    DATE: 2015-01-25
 //     URL: https://github.com/RobTillaart/Fraction
 
 
@@ -62,7 +61,7 @@ void loop()
 void testPlus()
 {
   Serial.println("testPlus");
-  Serial.println(a + b);
+  Serial.println((a + b).toString());
   Fraction c = a + b;
   Serial.println(c.toString());
   c = a;
@@ -76,7 +75,7 @@ void testPlus()
 void testMin()
 {
   Serial.println("testMin");
-  Serial.println(a - b);
+  Serial.println((a - b).toString());
   Fraction c = a - b;
   Serial.println(c.toString());
   c = a;
@@ -90,7 +89,7 @@ void testMin()
 void testMul()
 {
   Serial.println("testMul");
-  Serial.println(a * b);
+  Serial.println((a * b).toString());
   Fraction c = a * b;
   Serial.println(c.toString());
   c = a;
@@ -104,7 +103,7 @@ void testMul()
 void testDiv()
 {
   Serial.println("testDiv");
-  Serial.println(a / b);
+  Serial.println((a / b).toString());
   Fraction c = a / b;
   Serial.println(c.toString());
   c = a;
@@ -177,5 +176,4 @@ void testGE()
 }
 
 
-// -- END OF FILE --
-
+//  -- END OF FILE --

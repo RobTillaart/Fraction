@@ -26,7 +26,7 @@ void setup()
   Fraction x = fractionize(f);
   stop = micros();
   Serial.println(stop - start);
-  Serial.println(x);
+  Serial.println(x.toString());
   Serial.println(x.toDouble(), 10);
   Serial.println();
 
@@ -35,7 +35,7 @@ void setup()
   Fraction y = fractionize(f);
   stop = micros();
   Serial.println(stop - start);
-  Serial.println(y);
+  Serial.println(y.toString());
   Serial.println(y.toDouble(), 10);
   Serial.println();
 
@@ -55,7 +55,7 @@ void loop()
   Serial.println();
   Serial.print(stop - start);
   Serial.print("\t");
-  Serial.print(y);
+  Serial.print(y.toString());
   Serial.print("\t");
   Serial.print(f, 10);
   Serial.print("\t");
@@ -70,7 +70,7 @@ void loop()
 
   Serial.print(stop - start);
   Serial.print("\t");
-  Serial.print(y);
+  Serial.print(y.toString());
   Serial.print("\t");
   Serial.print(f, 10);
   Serial.print("\t");
@@ -105,4 +105,3 @@ Fraction fractionize(float f)
 
 
 // -- END OF FILE --
-

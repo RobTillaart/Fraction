@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## [0.2.0] - 2024-04-22
+- improve quality of fraction search
+  - split of intpart before search improves #digits.
 - default value constructor (0)
 - add support for arrays
--
+- add examples including tests.
 
 ----
 

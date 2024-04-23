@@ -35,7 +35,8 @@ void Fraction::split(float f)
   //  EULER = 1264/465;  // 2.2e-6
 
   //  get robust for small values. (effectively zero)
-  if (abs(f) < 0.00001)
+  //  as 1/10000 is smallest
+  if (abs(f) < 0.0001)
   {
     n = 0;
     d = 1;
@@ -47,29 +48,20 @@ void Fraction::split(float f)
     d = 1;
     return;
   }
-  // Normalize to 0.0 ... 1.0
+
+  //  handle sign
   bool negative = f < 0;
   if (negative) f = -f;
 
-//  TODO investigate different strategy:
-//  intpart = int32_t(f);   //  strip of the integer part.
-//  f = f - intpart;        //  determine remainder
-//  determine n, d
-//  n += intpart * d;       //  add integer part * denominator to fraction.
-
-  bool reciproke = f > 1;
-  if (reciproke) f = 1/f;
+  //  strip of the integer part and process only remainder (0.0..1.0)
+  int32_t integerPart = int32_t(f);  
+  f = f - integerPart;
 
   fractionize(f);
   simplify();
 
-  //  denormalize
-  if (reciproke)
-  {
-    int32_t t = n;
-    n = d;
-    d = t;
-  }
+  //  add integerPart again, but in units of denominator.
+  n += (integerPart * d);
   if (negative)
   {
       n = -n;
@@ -400,6 +392,8 @@ void Fraction::fractionize(float val)
   float Precision = 0.0000001;
   Fraction low(0, 1);             // "A" = 0/1
   Fraction high(1, 1);            // "B" = 1/1
+
+  //  max 100 iterations
   for (int i = 0; i < 100; ++i)
   {
     float testLow = low.d * val - low.n;
