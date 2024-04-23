@@ -6,8 +6,10 @@
 
 
 //  step size to test, typical 100000
-//  AVR UNO takes a bit less than 500 seconds 
-//  to process 100.000 tests
+//  for 100.000 tests
+//  - AVR UNO 16 MHz takes ~500 seconds at 115200 baud
+//  - ESP32 240 MHz takes ~400 seconds at 115200 baud
+//  - ESP32 240 MHz takes ~85 seconds at 500000 baud
 
 const uint32_t N = 100000;
 
@@ -20,16 +22,21 @@ uint32_t pos = 0;
 
 void setup()
 {
-  Serial.begin(115200);
+  //  NOTE BAUDRATE!
+  Serial.begin(500000);
   Serial.print(__FILE__);
   Serial.print("FRACTION_LIB_VERSION: ");
   Serial.println(FRACTION_LIB_VERSION);
   Serial.println();
   delay(100);
 
+  Fraction pi(PI);
+  Serial.println(pi.toString());
+  delay(1000);
+
   start = millis();
 
-  for (uint32_t n = 10; n <= N; n++)
+  for (uint32_t n = 100; n <= N; n++)
   {
     float g = n * (1.0 / N);
     Fraction frac( g );

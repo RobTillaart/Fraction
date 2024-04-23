@@ -44,7 +44,7 @@ unittest_teardown()
 unittest(test_constructor)
 {
   Fraction pi(PI);
-  assertEqualFloat(PI, pi.toFloat(), 0.0001)
+  assertEqualFloat(PI, pi.toFloat(), 0.0001);
   //  what we wished it would find.
   //  assertEqual(355, pi.nominator());
   //  assertEqual(113, pi.denominator());
@@ -54,7 +54,7 @@ unittest(test_constructor)
   fprintf(stderr, "pi %1.8f\n", pi.toFloat());
 
   Fraction ee(EULER);
-  assertEqualFloat(EULER, ee.toFloat(), 0.0001)
+  assertEqualFloat(EULER, ee.toFloat(), 0.0001);
   //  what we wished it would find.
   //  assertEqual(3985, ee.nominator());
   //  assertEqual(1466, ee.denominator());

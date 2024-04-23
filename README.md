@@ -67,11 +67,6 @@ Serial.print(fr.toString());  //  prints "(355/113)"
 ```
 
 
-#### Related
-
-
-
-
 ## Interface
 
 ```cpp

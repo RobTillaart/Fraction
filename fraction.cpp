@@ -357,7 +357,7 @@ void Fraction::simplify()
   //  in preventing overflow
   while (q > 10000)
   {
-    //  rounding might need improvement
+    //  rounding need improvement
     p = (p + 5)/10;
     q = (q + 5)/10;
     x = gcd(p, q);
@@ -412,7 +412,7 @@ void Fraction::fractionize(float val)
       int32_t count = (int32_t)test;    //  "N"
       int32_t n = (count + 1) * low.n + high.n;
       int32_t d = (count + 1) * low.d + high.d;
-      if ((n > 0x10000) || (d > 0x10000))
+      if ((n > 0x8000) || (d > 0x10000))   //   0x8000 0x10000
       break;
       high.n = n - low.n;  //  new "A"
       high.d = d - low.d;
@@ -425,7 +425,7 @@ void Fraction::fractionize(float val)
       int32_t count = (int32_t)test;     //  "N"
       int32_t n = low.n + (count + 1) * high.n;
       int32_t d = low.d + (count + 1) * high.d;
-      if ((n > 0x10000) || (d > 0x10000))
+      if ((n > 0x10000) || (d > 0x10000))   //   0x10000 0x10000
       break;
       low.n = n - high.n;  //  new "A"
       low.d = d - high.d;
