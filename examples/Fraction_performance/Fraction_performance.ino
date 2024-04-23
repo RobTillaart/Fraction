@@ -51,14 +51,14 @@ void test_constructor()
   Serial.print("TIME: \t");
   Serial.println(stop - start);
 
-  Serial.println(q);
-  Serial.println(a);
-  Serial.println(aa);
-  Serial.println(b);
-  Serial.println(n);
-  Serial.println(p);
-  Serial.println(pi);
-  Serial.println(e);
+  Serial.println(q.toString());
+  Serial.println(a.toString());
+  Serial.println(aa.toString());
+  Serial.println(b.toString());
+  Serial.println(n.toString());
+  Serial.println(p.toString());
+  Serial.println(pi.toString());
+  Serial.println(e.toString());
 }
 
 
@@ -76,7 +76,7 @@ void test_math()
   stop = micros();
   Serial.print("TIME +: \t");
   Serial.println(stop - start);
-  Serial.println(a);
+  Serial.println(a.toString());
 
   delay(10);
   start = micros();
@@ -84,7 +84,7 @@ void test_math()
   stop = micros();
   Serial.print("TIME -: \t");
   Serial.println(stop - start);
-  Serial.println(a);
+  Serial.println(a.toString());
 
   delay(10);
   start = micros();
@@ -92,7 +92,7 @@ void test_math()
   stop = micros();
   Serial.print("TIME *: \t");
   Serial.println(stop - start);
-  Serial.println(a);
+  Serial.println(a.toString());
 
   delay(10);
   start = micros();
@@ -100,7 +100,7 @@ void test_math()
   stop = micros();
   Serial.print("TIME /: \t");
   Serial.println(stop - start);
-  Serial.println(a);
+  Serial.println(a.toString());
 }
 
 
@@ -151,7 +151,7 @@ void  test_misc()
   stop = micros();
   Serial.print("TIME mediant(): \t");
   Serial.println(stop - start);
-  Serial.println(a);
+  Serial.println(a.toString());
 
   delay(10);
   start = micros();
@@ -159,7 +159,7 @@ void  test_misc()
   stop = micros();
   Serial.print("TIME middle(): \t");
   Serial.println(stop - start);
-  Serial.println(a);
+  Serial.println(a.toString());
 }
 
 
