@@ -6,14 +6,17 @@
 
 
 //  step size to test, typical 100000
-uint32_t N = 100000;
+//  AVR UNO takes a bit less than 500 seconds 
+//  to process 100.000 tests
+
+const uint32_t N = 100000;
 
 
 #include "fraction.h"
 
 uint32_t start, stop;
 float maxError = 0;
-
+uint32_t pos = 0;
 
 void setup()
 {
@@ -26,29 +29,29 @@ void setup()
 
   start = millis();
 
-  for (uint32_t n = 0; n <= N; n++)
+  for (uint32_t n = 10; n <= N; n++)
   {
     float g = n * (1.0 / N);
     Fraction frac( g );
     float f = frac.toFloat();
-    //  test for relative error 1e-4 = 0.01%
+
     //  find the maxError so far.
     float relError = abs(abs(f / g) - 1);
-    // float absError = abs(f - g);
-    // if (relError > maxError)
+    if (relError > maxError)
     {
-      if (relError > maxError) maxError = relError;
-      Serial.print(n);
-      Serial.print("\t");
-      Serial.print(g, 6);
-      Serial.print("\t");
-      Serial.print(f, 6);
-      Serial.print("\t");
-      Serial.print(100 * relError, 2);  //  as percentage
-      Serial.print("\t");
-      Serial.print(frac.toString());
-      Serial.println();
+      maxError = relError;
+      pos = n;
     }
+    Serial.print(n);
+    Serial.print("\t");
+    Serial.print(g, 6);
+    Serial.print("\t");
+    Serial.print(f, 6);
+    Serial.print("\t");
+    Serial.print(100 * relError, 3);  //  as percentage
+    Serial.print("\t");
+    Serial.print(frac.toString());
+    Serial.println();
   }
   stop = millis();
   Serial.println();
@@ -56,6 +59,8 @@ void setup()
   Serial.println(stop - start);
   Serial.print("MAXERR: ");
   Serial.println(maxError);
+  Serial.print("   POS: ");
+  Serial.println(pos);
 }
 
 
