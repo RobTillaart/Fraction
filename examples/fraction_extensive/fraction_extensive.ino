@@ -11,6 +11,7 @@
 //  - ESP32 240 MHz takes ~400 seconds at 115200 baud
 //  - ESP32 240 MHz takes ~85 seconds at 500000 baud
 
+
 const uint32_t N = 100000;
 
 
@@ -23,12 +24,13 @@ uint32_t pos = 0;
 void setup()
 {
   //  NOTE BAUDRATE!
-  Serial.begin(500000);
+  Serial.begin(115200);
   Serial.print(__FILE__);
   Serial.print("FRACTION_LIB_VERSION: ");
   Serial.println(FRACTION_LIB_VERSION);
   Serial.println();
   delay(100);
+
 
   Fraction pi(PI);
   Serial.println(pi.toString());
@@ -74,5 +76,6 @@ void setup()
 void loop()
 {
 }
+
 
 //  -- END OF FILE --

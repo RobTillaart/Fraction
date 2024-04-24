@@ -4,9 +4,9 @@
 // PURPOSE: test fraction memory
 //     URL: https://github.com/RobTillaart/Fraction
 //
-//  (0.1.16)
-//  On AVR it uses 10 bytes per element, where 8 were expected.
-//
+//  (0.1.16) On AVR it uses 10 bytes per element, where 8 were expected.
+//  (0.2.0)  solved this 
+
 
 #include "fraction.h"
 

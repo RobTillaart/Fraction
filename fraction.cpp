@@ -374,7 +374,14 @@ void Fraction::simplify()
 //  fractionize() - finds the fraction representation of a float
 //  PRE: 0 <= f < 1.0
 //
-//  minimalistic is fast and small
+//  minimalistic, fast and small accuracy ~1e-4
+// void Fraction::fractionize(float val)
+// {
+  // n = round(val * 9900);
+  // d = 9900;
+// }
+
+
 //
 //  check for a discussion found later (link is dead)
 //  - http://mathforum.org/library/drmath/view/51886.html
@@ -386,10 +393,14 @@ void Fraction::simplify()
 //  - http://mathforum.org/library/drmath/view/51886.html
 //  (100x) micros()=96048
 //  showed errors for very small values around 0
+
+
 void Fraction::fractionize(float val)
 {
   //  find nearest fraction
   float Precision = 0.0000001;
+  //  Fraction low(int(val * 9900), 9900);             // "A" = 0/1
+  //  Fraction high(int(val * 9240) + 1, 9240);            // "B" = 1/1
   Fraction low(0, 1);             // "A" = 0/1
   Fraction high(1, 1);            // "B" = 1/1
 
@@ -399,7 +410,7 @@ void Fraction::fractionize(float val)
     float testLow = low.d * val - low.n;
     float testHigh = high.n - high.d * val;
     if (testHigh < Precision * high.d)
-    break; //  high is answer
+    break;  //  high is answer
 
     if (testLow < Precision * low.d)
     {  //  low is answer

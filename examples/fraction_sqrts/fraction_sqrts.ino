@@ -4,6 +4,7 @@
 // PURPOSE: fraction version of first 10000 square roots
 //     URL: https://github.com/RobTillaart/Fraction
 
+
 #include "fraction.h"
 
 Fraction sqr;
@@ -22,7 +23,7 @@ void setup()
     Fraction sqr( sqrt(n));
     float f = sqr.toFloat();
     //  test for relative error 1e-5
-    //  if (abs((f * f/n) - 1) > 0.00001)
+    //  if (abs((f * f / n) - 1) > 0.00001)
     {
       Serial.print(n);
       Serial.print("\t");
@@ -44,4 +45,5 @@ void loop()
 {
 }
 
-// -- END OF FILE --
+
+//  -- END OF FILE --

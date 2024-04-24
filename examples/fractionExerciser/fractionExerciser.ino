@@ -2,9 +2,7 @@
 //    FILE: fractionExerciser.ino
 //  AUTHOR: Rob Tillaart
 // PURPOSE: demo sketch for fraction math
-//    DATE: 2015-03-29
 //     URL: https://github.com/RobTillaart/Fraction
-//
 
 
 #include "fraction.h"

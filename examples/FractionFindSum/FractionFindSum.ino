@@ -1,11 +1,12 @@
 //
 //    FILE: FractionFindSum.ino
 //  AUTHOR: Rob Tillaart
-// PURPOSE: demo
-//    DATE: 13-feb-2015
+// PURPOSE: demo fraction math.
 //     URL: https://github.com/RobTillaart/Fraction
 //
-
+//  Find a sum of fractions that (within accuracy) 
+//       adds up to a given fraction.
+//
 
 #include "fraction.h"
 
@@ -67,4 +68,4 @@ void loop()
 }
 
 
-// -- END OF FILE --
+//  -- END OF FILE --

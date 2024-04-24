@@ -7,11 +7,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## [0.2.0] - 2024-04-22
-- improve quality of fraction search
-  - split of integer part before search improves #digits.
-- default value for constructor (0, 1)
+- removed **Printable** interface, braking change
+- improve quality of **fractionize()** search
+  - split of integer part before search improves precision.
 - add support for arrays
-- add examples including tests.
+  - default value for constructor (0, 1)
+  - add **fraction_array.ino** + **fraction_sizeof.ino**
+- add **toString()**
+- add **isInteger()**
+- update examples
+  - add **fraction_extensive.ino** test range and accuracy sketch
+  - add **fraction_sqrts.ino** test sketch
+  - add **fraction_fast.ino**, fast determination of fraction with 9900 as denominator.
+    - this is very fast, with an accuracy ~1e-4
+  - optimized **FractionMediant.ino** determine fraction with mediant.
+  - add **FactionPowers2.ino**, fast determination of fraction with powers of 2.- add examples including tests.
+- update readme.md
 
 ----
 

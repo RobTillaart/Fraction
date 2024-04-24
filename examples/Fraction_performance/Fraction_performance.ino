@@ -2,7 +2,6 @@
 //    FILE: fractionTest01.ino
 //  AUTHOR: Rob Tillaart
 // PURPOSE: test sketch for fraction math
-//    DATE: 2015-01-25
 //     URL: https://github.com/RobTillaart/Fraction
 
 
