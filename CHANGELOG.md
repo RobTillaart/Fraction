@@ -20,7 +20,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   - add **fraction_sqrts.ino** test sketch
   - add **fraction_fast.ino**, fast determination of fraction with 9900 as denominator.
     - this is very fast, with an accuracy ~1e-4
+  - add **fraction_full_scan.ino** for a full scan search.
   - optimized **FractionMediant.ino** determine fraction with mediant.
+  - add **fraction_setDenominator.ino** demo
   - add **FactionPowers2.ino**, fast determination of fraction with powers of 2.- add examples including tests.
 - update readme.md
 

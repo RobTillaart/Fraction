@@ -136,7 +136,7 @@ The format is "(n/d)", where n has optionally the sign.
 
 - **Fraction mediant(const Fraction&, const Fraction&)**
 - **Fraction middle(const Fraction&, const Fraction&)**
-- **Fraction setDenominator(const Fraction&, uint16_t)**
+- **Fraction setDenominator(const Fraction&, uint16_t)** (might be simplified still)
 
 
 ## Use with care
