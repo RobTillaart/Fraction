@@ -372,80 +372,33 @@ void Fraction::simplify()
 //////////////////////////////////////////////////////////////////////////////
 //
 //  fractionize() - finds the fraction representation of a float
-//  PRE: 0 <= f < 1.0
+//  PRE: 0 <= val < 1
 //
-//  minimalistic, fast and small accuracy ~1e-4
-// void Fraction::fractionize(float val)
-// {
-  // n = round(val * 9900);
-  // d = 9900;
-// }
-
-
+//  This function computes the successive convergents of the continued
+//  fraction expansion of its argument. It returns the last convergent
+//  that has a denominator smaller than 10,000. The result is expected
+//  to be within a few UPLs of the input value.
 //
-//  check for a discussion found later (link is dead)
-//  - http://mathforum.org/library/drmath/view/51886.html
-//  - http://www.gamedev.net/topic/354209-how-do-i-convert-a-decimal-to-a-fraction-in-c/
-//
-
-
-//  Dr. Peterson
-//  - http://mathforum.org/library/drmath/view/51886.html
-//  (100x) micros()=96048
-//  showed errors for very small values around 0
-
-
 void Fraction::fractionize(float val)
 {
-  //  find nearest fraction
-  float Precision = 0.0000001;
-  //  Fraction low(int(val * 9900), 9900);             // "A" = 0/1
-  //  Fraction high(int(val * 9240) + 1, 9240);            // "B" = 1/1
-  Fraction low(0, 1);             // "A" = 0/1
-  Fraction high(1, 1);            // "B" = 1/1
-
-  //  max 100 iterations
-  for (int i = 0; i < 100; ++i)
-  {
-    float testLow = low.d * val - low.n;
-    float testHigh = high.n - high.d * val;
-    if (testHigh < Precision * high.d)
-    break;  //  high is answer
-
-    if (testLow < Precision * low.d)
-    {  //  low is answer
-      high = low;
+  constexpr int32_t max_denominator = 10000;
+  constexpr float epsilon = 1.0 / max_denominator;  // practically zero
+  int16_t p2 = 0, p1 = 1;     // successive numerators
+  int16_t q2 = 1, q1 = 0;     // successive denominators
+  for (;;) {
+    int32_t a = val;          // integer part
+    int32_t p = a * p1 + p2;  // recurrence
+    int32_t q = a * q1 + q2;  // recurrence
+    if (q >= max_denominator)
       break;
-    }
-    if (i & 1)
-    {  //  odd step: add multiple of low to high
-      float test = testHigh / testLow;
-      int32_t count = (int32_t)test;    //  "N"
-      int32_t n = (count + 1) * low.n + high.n;
-      int32_t d = (count + 1) * low.d + high.d;
-      if ((n > 0x8000) || (d > 0x10000))   //   0x8000 0x10000
+    p2 = p1; p1 = p;
+    q2 = q1; q1 = q;
+    if (val - a < epsilon)     // found a quasi-exact match
       break;
-      high.n = n - low.n;  //  new "A"
-      high.d = d - low.d;
-      low.n = n;           //  new "B"
-      low.d = d;
-    }
-    else
-    {   //  even step: add multiple of high to low
-      float test = testLow / testHigh;
-      int32_t count = (int32_t)test;     //  "N"
-      int32_t n = low.n + (count + 1) * high.n;
-      int32_t d = low.d + (count + 1) * high.d;
-      if ((n > 0x10000) || (d > 0x10000))   //   0x10000 0x10000
-      break;
-      low.n = n - high.n;  //  new "A"
-      low.d = d - high.d;
-      high.n = n;          //  new "B"
-      high.d = d;
-    }
+    val = 1/(val - a);
   }
-  n = high.n;
-  d = high.d;
+  n = p1;
+  d = q1;
 }
 
 
