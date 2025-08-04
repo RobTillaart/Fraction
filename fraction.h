@@ -52,23 +52,26 @@ public:
     Fraction& operator /= (const Fraction&);
 
     //  CONVERSION and PRINTING
-    double  toDouble();
-    float   toFloat();
-    String  toString();
+    int32_t  toInt32();
+    double   toDouble();
+    float    toFloat();
+    String   toString();
 
-    bool    isProper();     //  abs(f) < 1
-    bool    isInteger();    //  d == 1
-    float   toAngle();
+    bool     isProper();     //  abs(f) < 1
+    bool     isInteger();    //  d == 1
+    float    toAngle();      //  uses atan2() => -180..180 degrees.
 
     int32_t  nominator();
     int32_t  denominator();
 
-    //  MISCELLANEOUS (static)
+    //  MISCELLANEOUS
     static Fraction mediant(const Fraction&, const Fraction&);
     static Fraction middle(const Fraction&, const Fraction&);
 
     //  approximate a fraction with defined denominator
     static Fraction setDenominator(const Fraction&, uint16_t);
+
+    Fraction reciprocal();   //  F = 1/F;
 
 
 protected:

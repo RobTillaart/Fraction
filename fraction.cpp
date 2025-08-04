@@ -225,6 +225,12 @@ Fraction& Fraction::operator /= (const Fraction &c)
 //
 //  CONVERSION and PRINTING
 //
+int32_t Fraction::toInt32()
+{
+  return n / d;
+}
+
+
 double Fraction::toDouble()
 {
   return double(n) / d;
@@ -239,8 +245,9 @@ float Fraction::toFloat()
 
 String Fraction::toString()
 {
-  String s = "(";
-  // if (n < 0) s += "-";
+  String s = ""
+  s += "(";
+  //  if (n*d < 0) s += "-";   use abs(n)  abs(d)
   s += n;
   s += "/";
   s += d;
@@ -318,6 +325,12 @@ Fraction Fraction::setDenominator(const Fraction &a, uint16_t b)
   int32_t n = round((a.n * b * 1.0) / a.d);
   int32_t d = b;
   return Fraction(n, d);
+}
+
+
+Fraction Fraction::reciprocal()
+{
+  return Fraction(d, n);
 }
 
 

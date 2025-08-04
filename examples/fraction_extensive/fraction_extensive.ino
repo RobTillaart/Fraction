@@ -68,7 +68,7 @@ void setup()
   Serial.print("MILLIS: ");
   Serial.println(stop - start);
   Serial.print("MAXERR: ");
-  Serial.println(maxError);
+  Serial.println(maxError, 4);
   Serial.print("   POS: ");
   Serial.println(pos);
 }

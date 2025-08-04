@@ -9,8 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.3.0] - 2025-08-04
 - merge PR #12 with improved fractionize() function (Kudos to Edgar Bonet)
 - add performance logs - performance sketch
-- add fraction_linear_search.ino example.
+- add Fraction_linear_search.ino example.
+- add Fraction_accuracy.ino example
+- add **Fraction reciprocal()** F = 1/F;
+- add **int32_t toInt32()** return int(n/d)
 - update examples
+- update readme.md
 - minor edits
 
 ----
@@ -70,7 +74,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.1.10] - 2020-06-10
 - fix library.json
 
----- 
+----
 
 ## [0.1.9] - 2020-04-26
 - refactor

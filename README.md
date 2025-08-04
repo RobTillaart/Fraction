@@ -18,19 +18,20 @@ Arduino library to implement a Fraction data type.
 
 **Experimental**
 
-The fraction library implements fractional numbers a.k.a. Q,
+The fraction library implements fractional numbers (a / b) a.k.a. Q
 (integers are Z and floats/doubles are R), and the conversion to floats.
 
 The code is working with a number of limitations a.o.:
-- denominator is max 4 digits to keep code for multiply and divide simple
-- Fractions are not exact, even floats are not exact.
-- the range of numbers supported is limited.
-- code is experimental.
+- Denominator is max 4 digits to keep code for multiply and divide simple
+- Fractions are not always an exact representation of floats, even floats are not exact.
+- The range of numbers supported is limited.
+- The code is experimental.
 
-That said, the library is useful e.g. to display float numbers as a fraction.
-From programming point of view the **fractionize(float)** function, 
-converting a double / float into a fraction is a nice programming problem, 
-how to do it fast while minimizing the error.
+That said, the library is useful e.g. to display float numbers as a fraction,
+or only to display the numerator.
+From programming point of view the **fractionize(float)** function, for 
+converting a double or float into a fraction is a nice programming problem.
+How to do it, how to do it fast, how to minimize the absolute error.
 
 In short, use fractions with care otherwise your sketch might get broken ;)
 
@@ -56,7 +57,7 @@ float f  >  float g  implies  Fraction(g)  >=  Fraction(f)
 
 ### 0.3.0 new fractionize() algorithm
 
-Thanks to Edgar Bonet for a new, faster and more precise fractionize algoritm
+Thanks to Edgar Bonet for a new, faster and more precise fractionize() algoritm
 based upon **Simple continued fractions**.
 
 The new algorithm can / will change previous expected outputs.
@@ -138,12 +139,14 @@ The Fraction library implements:
 
 ### Conversion
 
+- **int32_t toInt32()** returns int(n/d), e.g. 17/4 => 4.
+Truncates, no rounding, for rounding use ```round(F.toFloat());```
 - **double toDouble()** converts the fraction to a double.
 - **float toFloat()** converts the fraction to a float.
 - **String toString()** converts the fraction to a String.
 The format is "(n/d)", where n has optionally the sign.
-- **bool isProper()** absolute value < 1.
-- **float toAngle()** returns 0..360 degrees.
+- **bool isProper()** returns true if -1 < fraction < 1. Or the abs(fraction) < 1
+- **float toAngle()** returns -180..180 degrees - uses atan2()
 - **int32_t nominator()** returns the nominator.
 - **int32_t denominator()** returns the denominator.
 
@@ -152,6 +155,7 @@ The format is "(n/d)", where n has optionally the sign.
 - **Fraction mediant(const Fraction&, const Fraction&)**
 - **Fraction middle(const Fraction&, const Fraction&)**
 - **Fraction setDenominator(const Fraction&, uint16_t)** (might be simplified still)
+- **Fraction reciprocal()** F = 1.0 / F, effectively swap nominator and denominator. 
 
 ## Use with care
 
@@ -167,8 +171,6 @@ The library is reasonably tested. If problems arise please open an issue.
 
 #### Should
 
-- investigate the fraction of PI (0.2.0 does not find 355/113)
-- performance testing
 - **float fractionize()** returns the error.
 - investigate divide by zero errors
   - NAN in fraction?  =>  0/0 ?
@@ -179,12 +181,17 @@ The library is reasonably tested. If problems arise please open an issue.
 - extend unit tests
 - experiment with bigger nominator/denominator using all of 32767 possibilities ?
 - add famous constants as Fraction e.g 
-  - FRAC_PI = 355/113
-  - FRAC_E  = 3985/1466
+  - FRAC_NULL = 0/1
+  - FRAC_ONE  = 1/1
+  - FRAC_PI   = 355/113
+  - FRAC_E    = 3985/1466
   - FRAC_GOLDEN_RATIO = (2584/1597)
-- add parameters to **toString()** to set () and separator?
+- **double stepsize()** ==> 1/abs(d)
 
 #### Wont
+
+- add parameters to **toString()** to set () and separator?
+  e.g. **toString(char separator = '/', char open = '(', char close = ')')** 
 
 
 ## Support
