@@ -1,7 +1,7 @@
 //
 //    FILE: fraction.cpp
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.2.0
+// VERSION: 0.3.0
 // PURPOSE: Arduino library to implement a Fraction data type
 //     URL: https://github.com/RobTillaart/Fraction
 
@@ -30,7 +30,7 @@ void Fraction::split(float f)
   //  handle special cases?
   //  PI = 355/113;      // 2.7e-7
   //  PI*2 = 710/113;
-  //  PI/2 = 335/226;
+  //  PI/2 = 355/226;
   //  EULER = 2721/1001; // 1.1e-7
   //  EULER = 1264/465;  // 2.2e-6
 
@@ -54,7 +54,7 @@ void Fraction::split(float f)
   if (negative) f = -f;
 
   //  strip of the integer part and process only remainder (0.0..1.0)
-  int32_t integerPart = int32_t(f);  
+  int32_t integerPart = int32_t(f);
   f = f - integerPart;
 
   fractionize(f);
@@ -372,7 +372,87 @@ void Fraction::simplify()
 //////////////////////////////////////////////////////////////////////////////
 //
 //  fractionize() - finds the fraction representation of a float
-//  PRE: 0 <= val < 1
+//  PRE: 0 <= f < 1.0
+//
+//  minimalistic, fast and small accuracy ~1e-4
+// void Fraction::fractionize(float val)
+// {
+  // n = round(val * 9900);
+  // d = 9900;
+// }
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+//  PRE 0.3.0 version
+//
+//  check for a discussion found later (link is dead)
+//  - http://mathforum.org/library/drmath/view/51886.html
+//  - http://www.gamedev.net/topic/354209-how-do-i-convert-a-decimal-to-a-fraction-in-c/
+//  Dr. Peterson
+//  - http://mathforum.org/library/drmath/view/51886.html
+//  (100x) micros()=96048
+//  showed errors for very small values around 0
+
+/*
+void Fraction::fractionize(float val)
+{
+  //  find nearest fraction
+  float Precision = 0.0000001;
+  //  Fraction low(int(val * 9900), 9900);             // "A" = 0/1
+  //  Fraction high(int(val * 9240) + 1, 9240);            // "B" = 1/1
+  Fraction low(0, 1);             // "A" = 0/1
+  Fraction high(1, 1);            // "B" = 1/1
+
+  //  max 100 iterations
+  for (int i = 0; i < 100; ++i)
+  {
+    float testLow = low.d * val - low.n;
+    float testHigh = high.n - high.d * val;
+    if (testHigh < Precision * high.d)
+    break;  //  high is answer
+
+    if (testLow < Precision * low.d)
+    {  //  low is answer
+      high = low;
+      break;
+    }
+    if (i & 1)
+    {  //  odd step: add multiple of low to high
+      float test = testHigh / testLow;
+      int32_t count = (int32_t)test;    //  "N"
+      int32_t n = (count + 1) * low.n + high.n;
+      int32_t d = (count + 1) * low.d + high.d;
+      if ((n > 0x8000) || (d > 0x10000))   //   0x8000 0x10000
+      break;
+      high.n = n - low.n;  //  new "A"
+      high.d = d - low.d;
+      low.n = n;           //  new "B"
+      low.d = d;
+    }
+    else
+    {   //  even step: add multiple of high to low
+      float test = testLow / testHigh;
+      int32_t count = (int32_t)test;     //  "N"
+      int32_t n = low.n + (count + 1) * high.n;
+      int32_t d = low.d + (count + 1) * high.d;
+      if ((n > 0x10000) || (d > 0x10000))   //   0x10000 0x10000
+      break;
+      low.n = n - high.n;  //  new "A"
+      low.d = d - high.d;
+      high.n = n;          //  new "B"
+      high.d = d;
+    }
+  }
+  n = high.n;
+  d = high.d;
+}
+*/
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+//  Version from Edgar Bonet, see PR#12
 //
 //  This function computes the successive convergents of the continued
 //  fraction expansion of its argument. It returns the last convergent
@@ -382,18 +462,18 @@ void Fraction::simplify()
 void Fraction::fractionize(float val)
 {
   constexpr int32_t max_denominator = 10000;
-  constexpr float epsilon = 1.0 / max_denominator;  // practically zero
-  int16_t p2 = 0, p1 = 1;     // successive numerators
-  int16_t q2 = 1, q1 = 0;     // successive denominators
+  constexpr float epsilon = 1.0 / max_denominator;  //  practically zero
+  int16_t p2 = 0, p1 = 1;     //  successive numerators
+  int16_t q2 = 1, q1 = 0;     //  successive denominators
   for (;;) {
-    int32_t a = val;          // integer part
-    int32_t p = a * p1 + p2;  // recurrence
-    int32_t q = a * q1 + q2;  // recurrence
+    int32_t a = val;          //  integer part
+    int32_t p = a * p1 + p2;  //  recurrence
+    int32_t q = a * q1 + q2;  //  recurrence
     if (q >= max_denominator)
       break;
     p2 = p1; p1 = p;
     q2 = q1; q1 = q;
-    if (val - a < epsilon)     // found a quasi-exact match
+    if (val - a < epsilon)     //  found a quasi-exact match
       break;
     val = 1/(val - a);
   }

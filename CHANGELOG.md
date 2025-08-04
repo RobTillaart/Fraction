@@ -6,8 +6,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [0.3.0] - 2025-08-04
+- merge PR #12 with improved fractionize() function (Kudos to Edgar Bonet)
+- add performance logs - performance sketch
+- add fraction_linear_search.ino example.
+- update examples
+- minor edits
+
+----
+
 ## [0.2.0] - 2024-04-22
-- removed **Printable** interface, braking change
+- removed **Printable** interface, breaking change
 - improve quality of **fractionize()** search
   - split of integer part before search improves precision.
 - add support for arrays

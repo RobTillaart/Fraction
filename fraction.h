@@ -2,14 +2,14 @@
 //
 //    FILE: fraction.h
 //  AUTHOR: Rob Tillaart
-// VERSION: 0.2.0
+// VERSION: 0.3.0
 // PURPOSE: Arduino library to implement a Fraction data type
 //     URL: https://github.com/RobTillaart/Fraction
 
 
 #include "Arduino.h"
 
-#define FRACTION_LIB_VERSION            (F("0.2.0"))
+#define FRACTION_LIB_VERSION            (F("0.3.0"))
 
 
 class Fraction

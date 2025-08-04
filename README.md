@@ -11,10 +11,12 @@
 
 # Fraction
 
-Arduino library to implement a Fraction data type (experimental).
+Arduino library to implement a Fraction data type.
 
 
 ## Description
+
+**Experimental**
 
 The fraction library implements fractional numbers a.k.a. Q,
 (integers are Z and floats/doubles are R), and the conversion to floats.
@@ -33,7 +35,7 @@ how to do it fast while minimizing the error.
 In short, use fractions with care otherwise your sketch might get broken ;)
 
 
-#### Notes on natural order
+### Notes on natural order
 
 Depending on **fractionize(float)** algorithm used the natural order of numbers
 might be broken. 
@@ -45,14 +47,22 @@ float f  >  float g  does not imply  Fraction(g)  >  Fraction(f)
 
 The minimalistic **fractionize** keeps the natural order due its simplicity.
 It does have a lower accuracy as only limited number of denominators are used.
-This means that  if two floats are very close
+This means that if two floats are very close
 ```
 float f  <  float g  implies  Fraction(f)  <=  Fraction(g)
 float f  >  float g  implies  Fraction(g)  >=  Fraction(f)
 ```
 
 
-#### 0.2.0 Breaking change 1
+### 0.3.0 new fractionize() algorithm
+
+Thanks to Edgar Bonet for a new, faster and more precise fractionize algoritm
+based upon **Simple continued fractions**.
+
+The new algorithm can / will change previous expected outputs.
+
+
+### 0.2.0 Breaking change 1
 
 When testing with the array implementation it became evident that some
 Fractions were incorrect (not just inaccurate). 
@@ -68,7 +78,7 @@ are no issues left. In fact the well known fraction for PI = 355/113 is not
 found in 0.2.0 any more. This will be investigated in the future.
 
 
-#### 0.2.0 Breaking change 2
+### 0.2.0 Breaking change 2
 
 The 0.1.x version implemented the **Printable** interface to allow direct 
 printing of a Fraction object.
@@ -85,13 +95,22 @@ Serial.print(fr.toString());
 Fractions can also be printed by using **toFloat()** or **toDouble()**
 
 
+### Related
+
+- https://en.wikipedia.org/wiki/Simple_continued_fraction
+
+For printing floats in scientific or engineering format
+
+- https://github.com/RobTillaart/printHelpers
+
+
 ## Interface
 
 ```cpp
 #include "fraction.h"
 ```
 
-#### Constructors
+### Constructors
 
 - **explicit Fraction(double)**
 - **explicit Fraction(float)**
@@ -104,13 +123,11 @@ Fractions can also be printed by using **toFloat()** or **toDouble()**
 - **explicit Fraction(uint8_t p)**
 - **Fraction(const Fraction &f)**
 
-
-#### Equalities
+### Equalities
 
 The Fraction library implements ==, !=, >=, >, <, <=
 
-
-#### Basic Math
+### Basic Math
 
 The Fraction library implements:
 - addition: + and += 
@@ -119,8 +136,7 @@ The Fraction library implements:
 - division: / and /=
 - negation: -
 
-
-#### Conversion
+### Conversion
 
 - **double toDouble()** converts the fraction to a double.
 - **float toFloat()** converts the fraction to a float.
@@ -131,13 +147,11 @@ The format is "(n/d)", where n has optionally the sign.
 - **int32_t nominator()** returns the nominator.
 - **int32_t denominator()** returns the denominator.
 
-
-#### Miscellaneous (static)
+### Miscellaneous (static)
 
 - **Fraction mediant(const Fraction&, const Fraction&)**
 - **Fraction middle(const Fraction&, const Fraction&)**
 - **Fraction setDenominator(const Fraction&, uint16_t)** (might be simplified still)
-
 
 ## Use with care
 
@@ -155,10 +169,6 @@ The library is reasonably tested. If problems arise please open an issue.
 
 - investigate the fraction of PI (0.2.0 does not find 355/113)
 - performance testing
-- investigate better **fractionize()** 
-  - see **fraction_fast.ino** for faster fractionize (price == accuracy)
-  - a good start value ?
-  - depends on nominator / denominator size
 - **float fractionize()** returns the error.
 - investigate divide by zero errors
   - NAN in fraction?  =>  0/0 ?
