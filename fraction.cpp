@@ -245,8 +245,7 @@ float Fraction::toFloat()
 
 String Fraction::toString()
 {
-  String s = ""
-  s += "(";
+  String s = "(";
   //  if (n*d < 0) s += "-";   use abs(n)  abs(d)
   s += n;
   s += "/";
