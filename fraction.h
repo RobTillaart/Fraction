@@ -71,7 +71,8 @@ public:
     //  approximate a fraction with defined denominator
     static Fraction setDenominator(const Fraction&, uint16_t);
 
-    Fraction reciprocal();   //  F = 1/F;
+    //  return a Fraction == 1/F
+    Fraction reciprocal();
 
 
 protected:
