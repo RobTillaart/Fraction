@@ -28,9 +28,8 @@ public:
     explicit Fraction(uint8_t p)   : n(p), d(1) {}
     Fraction(const Fraction &f) : n(f.n), d(f.d) {}
 
-    //  EQUALITIES
+    //  (IN)EQUALITIES
     bool operator == (const Fraction&);
-    //  bool operator == (const float&);
     bool operator != (const Fraction&);
     bool operator >  (const Fraction&);
     bool operator >= (const Fraction&);

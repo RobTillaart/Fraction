@@ -19,10 +19,14 @@ Arduino library to implement a Fraction data type.
 **Experimental**
 
 The fraction library implements fractional numbers (a / b) a.k.a. Q
-(integers are Z and floats/doubles are R), and the conversion to floats.
+(integers are Z and floats/doubles are R). 
+It supports conversion from and to floats (doubles), the basic math
+and equality operators, a **toString()** for printing in fraction format,
+and some fraction specific functions.
 
 The code is working with a number of limitations a.o.:
-- Denominator is max 4 digits to keep code for multiply and divide simple
+- the nominator is an int32_t, so relative large values with a decimal part can be expressed.
+- Denominator is max 4 digits (1..9999) to keep code for multiply and divide simple
 - Fractions are not always an exact representation of floats, even floats are not exact.
 - The range of numbers supported is limited.
 - The code is experimental.
@@ -40,15 +44,15 @@ In short, use fractions with care otherwise your sketch might get broken ;)
 
 Depending on **fractionize(float)** algorithm used the natural order of numbers
 might be broken. 
-This means that if two floats are very close
+This means that if two floats are very close:
 ```
 float f  <  float g  does not imply  Fraction(f)  <  Fraction(g)
-float f  >  float g  does not imply  Fraction(g)  >  Fraction(f)
+float f  >  float g  does not imply  Fraction(f)  >  Fraction(g)
 ```
 
-The minimalistic **fractionize** keeps the natural order due its simplicity.
+The minimalistic **fractionize** (see examples) keeps the natural order due its simplicity.
 It does have a lower accuracy as only limited number of denominators are used.
-This means that if two floats are very close
+This means that if two floats are very close:
 ```
 float f  <  float g  implies  Fraction(f)  <=  Fraction(g)
 float f  >  float g  implies  Fraction(g)  >=  Fraction(f)
@@ -57,7 +61,7 @@ float f  >  float g  implies  Fraction(g)  >=  Fraction(f)
 
 ### 0.3.0 new fractionize() algorithm
 
-Thanks to Edgar Bonet for a new, faster and more precise fractionize() algoritm
+Thanks to Edgar Bonet for a new, faster and more precise **fractionize()** algorithm
 based upon **Simple continued fractions**.
 
 The new algorithm can / will change previous expected outputs.
@@ -113,24 +117,31 @@ For printing floats in scientific or engineering format
 
 ### Constructors
 
-- **explicit Fraction(double)**
-- **explicit Fraction(float)**
-- **Fraction(int32_t nominator = 0, int32_t denominator = 1)** Default zero constructor
-- **explicit Fraction(int32_t p)**
-- **explicit Fraction(int16_t p)**
-- **explicit Fraction(int8_t p)**
-- **explicit Fraction(uint32_t p)**
-- **explicit Fraction(uint16_t p)**
-- **explicit Fraction(uint8_t p)**
-- **Fraction(const Fraction &f)**
+- **Fraction(int32_t nominator = 0, int32_t denominator = 1)** Default constructor, default value = zero.
+- **explicit Fraction(double)** construct a fraction from a double.
+- **explicit Fraction(float)** idem.
+- **explicit Fraction(int32_t p)** idem.
+- **explicit Fraction(int16_t p)** idem.
+- **explicit Fraction(int8_t p)** idem.
+- **explicit Fraction(uint32_t p)** idem.
+- **explicit Fraction(uint16_t p)** idem.
+- **explicit Fraction(uint8_t p)** idem.
+- **Fraction(const Fraction &f)** copy constructor.
 
 ### Equalities
 
 The Fraction library implements ==, !=, >=, >, <, <=
 
+ - **bool operator == (const Fraction&)** idem.
+ - **bool operator != (const Fraction&)** idem.
+ - **bool operator >  (const Fraction&)** idem.
+ - **bool operator >= (const Fraction&)** idem.
+ - **bool operator <  (const Fraction&)** idem.
+ - **bool operator <= (const Fraction&)** idem.
+
 ### Basic Math
 
-The Fraction library implements:
+The Fraction library implements the following basic math:
 - addition: + and += 
 - subtraction: - and -+
 - multiplication: \* and \*=
@@ -150,11 +161,17 @@ The format is "(n/d)", where n has optionally the sign.
 - **int32_t nominator()** returns the nominator.
 - **int32_t denominator()** returns the denominator.
 
-### Miscellaneous (static)
+### Miscellaneous
 
-- **Fraction mediant(const Fraction&, const Fraction&)**
-- **Fraction middle(const Fraction&, const Fraction&)**
-- **Fraction setDenominator(const Fraction&, uint16_t)** (might be simplified still)
+Both mediant() and middle() can be used for e.g. a binary search.
+Mediant() is slightly faster.
+
+- **Fraction mediant(const Fraction& a, const Fraction& b)** mediant returns a fraction
+that will always lie between fraction a and fraction b.
+- **Fraction middle(const Fraction& a, const Fraction& d)** middle returns a fraction 
+that lies in the mathematical middle of fraction a and fraction b.
+- **Fraction setDenominator(const Fraction&, uint16_t)** returns a fraction with a 
+defined denominator, (might be simplified still), e.g. power of 2.
 - **Fraction reciprocal()** F = 1.0 / F, effectively swap nominator and denominator. 
 
 ## Use with care
