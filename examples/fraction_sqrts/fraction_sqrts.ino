@@ -15,7 +15,7 @@ void setup()
   //  while(!Serial);  //  Leonardo
   Serial.begin(115200);
   Serial.println();
-  Serial.println(___FILE__);
+  Serial.println(__FILE__);
   Serial.println("FRACTION_LIB_VERSION: ");
   Serial.println(FRACTION_LIB_VERSION);
   Serial.println();

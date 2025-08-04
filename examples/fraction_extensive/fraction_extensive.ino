@@ -1,5 +1,5 @@
 //
-//    FILE: fraction_extensive_test.ino
+//    FILE: fraction_extensive.ino
 //  AUTHOR: Rob Tillaart
 // PURPOSE: reasonable extensive fraction test
 //     URL: https://github.com/RobTillaart/Fraction
