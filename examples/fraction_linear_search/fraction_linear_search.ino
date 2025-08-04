@@ -4,7 +4,7 @@
 // PURPOSE: test
 //     URL: https://github.com/RobTillaart/Fraction
 
-#include "Arduino.h"
+#include "fraction.h"
 
 uint32_t start, stop;
 
@@ -61,6 +61,18 @@ void setup()
   Serial.print("TIME: ");
   Serial.print(stop - start);
   Serial.println();
+  delay(100);
+
+  start = micros();
+  Fraction xx(value);
+  stop = micros();
+  Serial.println(xx.toDouble(), 4);
+  Serial.println(xx.toString());
+  Serial.print("TIME: ");
+  Serial.print(stop - start);
+  Serial.println();
+  delay(100);
+
 }
 
 void loop()
